@@ -9,7 +9,7 @@ Bookmarks to mymind for X automatically saves your X/Twitter bookmarks to your m
 ## Data we access
 
 ### Authentication tokens
-The extension reads your mymind session cookies (`_jwt`, `_cid`) and authenticity token to authenticate API requests to mymind on your behalf. These tokens are stored temporarily in your browser's session storage and are cleared when the browser closes. They are never transmitted to any server other than `access.mymind.com`.
+The extension reads your mymind session cookies (`_jwt`, `_cid`) and authenticity token to authenticate API requests to mymind on your behalf. The authenticity token is stored in your browser's local storage and persists until the extension is uninstalled. Cookies are read directly from the browser's cookie jar. These credentials are never transmitted to any server other than `access.mymind.com`.
 
 ### Bookmark actions
 The extension monitors bookmark requests on `x.com` to detect when you bookmark a tweet. It reads the tweet ID from the bookmark request body solely to identify which tweet to save. No other browsing activity is monitored or recorded.
@@ -34,13 +34,14 @@ The extension stores a local count of how many tweets you've saved. This number 
 - **`cookies`** — Read mymind session cookies to authenticate API requests
 - **`webRequest`** — Detect when you bookmark a tweet on X (read-only, no request modification)
 - **`storage`** — Store the save counter locally in your browser
-- **`scripting`** — Inject notification UI into the page to confirm saves
+- **`activeTab`** — Allows the extension to inject UI into the current tab when you click the extension icon
+- **`scripting`** — Inject notification and panel UI into the page to confirm saves and show connection status
 - **Host permissions on `x.com` / `twitter.com`** — Required to detect bookmark actions and resolve tweet URLs
 - **Host permissions on `access.mymind.com`** — Required to authenticate and save tweets to your mymind account
 
 ## Data retention
 
-Authentication tokens are stored in session storage and cleared when the browser closes. The save counter persists in local storage until the extension is uninstalled. No data is retained on any external server by this extension.
+The authenticity token and save counter persist in local storage until the extension is uninstalled. Session cookies are managed by the browser and follow their own expiry. No data is retained on any external server by this extension.
 
 ## Contact
 
