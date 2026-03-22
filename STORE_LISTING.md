@@ -1,7 +1,7 @@
 # Chrome Web Store Listing
 
 ## Name
-Bookmarks to mymind for X
+X Bookmarks to mymind
 
 ## Summary (132 chars max)
 Automatically save your X/Twitter bookmarks to your mymind account. Bookmark a tweet, and it appears in your mind instantly.
@@ -17,16 +17,13 @@ HOW IT WORKS
 3. Bookmark any tweet — it gets saved to your mymind library automatically
 
 FEATURES
-- Automatic saving: bookmark a tweet on X and it lands in your mymind
-- Clean notifications: a subtle toast confirms each save
-- Duplicate detection: already saved? It lets you know
-- Works with your existing mymind account — no new signups needed
+- Bookmark any tweet on X and it automatically saves to your mymind
 - Lightweight: no background tracking, no analytics, no data collection
 
 PRIVACY
 This extension only activates when you bookmark a tweet on X. It does not track your browsing, read your timeline, access your DMs, or collect any personal data. The only data sent is the tweet URL, directly to mymind's servers using your existing mymind session. Nothing is stored on external servers by this extension.
 
-Full privacy policy: https://github.com/iamumeransari/mymind-tweet-saver/blob/main/PRIVACY.md
+Full privacy policy: https://github.com/iamumeransari/x-bookmarks-to-mymind/blob/main/PRIVACY.md
 
 REQUIREMENTS
 - A mymind account (https://mymind.com)

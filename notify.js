@@ -93,6 +93,8 @@
       width: 24px;
       height: 24px;
       border-radius: 6px;
+      background: #000;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
       margin-right: 14px;
       flex-shrink: 0;

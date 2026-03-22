@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="66" viewBox="0 0 300 66">
+  <!-- Notification background with orange error border -->
+  <rect x="0.75" y="0.75" width="298.5" height="64.5" rx="4" ry="4" fill="#16181C" stroke="#FF5924" stroke-width="1.5"/>
+
+  <!-- X icon with dark bg -->
+  <rect x="21" y="21" width="24" height="24" rx="6" ry="6" fill="#1A1A1A"/>
+  <g transform="translate(27, 24.5) scale(0.0234)">
+    <path fill="#FFFFFF" fill-rule="nonzero" d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"/>
+  </g>
+
+  <!-- Error message -->
+  <text x="59" y="38" font-family="Nunito, sans-serif" font-size="16" font-weight="400" fill="#E7E9EA">Couldn't save — try again</text>
+</svg>

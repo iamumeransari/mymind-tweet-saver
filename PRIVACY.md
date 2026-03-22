@@ -1,4 +1,4 @@
-# Privacy Policy — Bookmarks to mymind for X
+# Privacy Policy — X Bookmarks to mymind
 
 **Last updated:** March 22, 2026
 
@@ -6,7 +6,7 @@ This is a community-built extension and is not officially affiliated with or end
 
 ## What this extension does
 
-Bookmarks to mymind for X lets you automatically save tweets to your mymind account when you bookmark them on X. The extension detects your bookmark action and sends the tweet URL to your mymind account.
+X Bookmarks to mymind lets you automatically save tweets to your mymind account when you bookmark them on X. The extension detects your bookmark action and sends the tweet URL to your mymind account.
 
 ## Data we access
 
@@ -47,8 +47,8 @@ Authentication credentials and the save counter are stored locally in your brows
 
 ## Open source
 
-This extension is open source. You can review the full source code at [github.com/iamumeransari/mymind-tweet-saver](https://github.com/iamumeransari/mymind-tweet-saver).
+This extension is open source. You can review the full source code at [github.com/iamumeransari/x-bookmarks-to-mymind](https://github.com/iamumeransari/x-bookmarks-to-mymind).
 
 ## Contact
 
-For questions about this privacy policy, open an issue on the [GitHub repository](https://github.com/iamumeransari/mymind-tweet-saver/issues).
+For questions about this privacy policy, open an issue on the [GitHub repository](https://github.com/iamumeransari/x-bookmarks-to-mymind/issues).

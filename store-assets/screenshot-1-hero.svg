@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap');</style>
+    <radialGradient id="bg-glow" cx="58%" cy="52%" r="45%">
+      <stop offset="0%" stop-color="#FF5924" stop-opacity="0.045"/>
+      <stop offset="100%" stop-color="#FF5924" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow-deep" x="-15%" y="-10%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="shadow-mid" x="-15%" y="-10%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="shadow-soft" x="-15%" y="-10%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="800" fill="#050505"/>
+  <rect width="1280" height="800" fill="url(#bg-glow)"/>
+
+  <!-- === MYMIND CARD — back layer, peeking out bottom-right === -->
+  <g transform="translate(480, 370) rotate(2.5, 200, 160)" filter="url(#shadow-deep)" opacity="0.7">
+    <rect width="420" height="320" rx="16" ry="16" fill="#1A1C20" stroke="#2F3336" stroke-width="1"/>
+
+    <!-- mymind header -->
+    <g transform="translate(20, 20) scale(0.4737)">
+      <path d="m13.1135979 1.54495422c-.2591574-.03664732-.5187049-.04495422-1.1419979-.04495422-.9503477 0-1.9036568.14934901-2.8351787.44088761-3.10272858 1.04273171-5.51426505 3.7677939-6.77685087 7.73477463-1.2374245 3.95026026-1.13745468 8.65465026.28840086 13.22541246 2.34062016 7.345208 7.72106031 12.7143038 13.22824111 13.3844416.3032801.0376329.5734354.0462837 1.1521876.0462837.9503675 0 1.9037092-.1493441 2.8351562-.4408528 3.1605014-1.0621537 5.5838002-3.7721399 6.7768369-7.7348603 1.2374544-3.9501538 1.1374774-8.6545278-.2883849-13.2253632-2.3317763-7.31748399-7.7009576-12.66011017-13.2384103-13.38576948zm.1949021-1.48728382c6.1611.8073856 11.9734 6.5744296 14.4727 14.4176296 1.5112 4.8443 1.6275 9.8616.2906 14.1292-1.3368 4.4406-4.1267 7.4972-7.7304 8.7083-1.1043.346-2.2087.519-3.313.519-.4069 0-.8719 0-1.3369-.0577-6.16106-.7497-11.97341-6.5744-14.47272-14.4176-1.511217-4.8443-1.627464-9.8616-.290623-14.12923 1.394963-4.38296 4.126773-7.49716 7.730423-8.708236 1.10435-.346023 2.20872-.519034 3.31302-.519034.465 0 .93 0 1.3369.0576704z" fill="#FF5924"/>
+      <path d="m11.7301 17.8631c1.0914 0 1.9762-.8778 1.9762-1.9607 0-1.083-.8848-1.9608-1.9762-1.9608s-1.97619.8778-1.97619 1.9608c0 1.0829.88479 1.9607 1.97619 1.9607z" fill="#FF5924"/>
+      <path d="m21.2637 24.9569-6.2774-16.09008 9.8229 14.70598z" fill="#FF5924"/>
+    </g>
+    <text x="38" y="31" font-family="'Nunito', sans-serif" font-size="12" font-weight="500" fill="#71767B">mymind</text>
+    <text x="400" y="31" font-family="'Nunito', sans-serif" font-size="11" font-weight="400" fill="#3a3d41" text-anchor="end">Just now</text>
+    <line x1="20" y1="44" x2="400" y2="44" stroke="#2F3336" stroke-width="0.5"/>
+    <!-- Source -->
+    <rect x="20" y="60" width="30" height="30" rx="7" ry="7" fill="#111"/>
+    <g transform="translate(27.5, 64.5) scale(0.0293)">
+      <path fill="#FFFFFF" d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"/>
+    </g>
+    <text x="62" y="73" font-family="'Nunito', sans-serif" font-size="15" font-weight="600" fill="#E7E9EA">@sarahchen</text>
+    <text x="62" y="89" font-family="'Nunito', sans-serif" font-size="12" font-weight="400" fill="#555">x.com</text>
+    <text font-family="'Nunito', sans-serif" font-size="14" font-weight="400" fill="#888">
+      <tspan x="20" y="126">Just discovered the most incredible</tspan>
+      <tspan x="20" dy="22">API for building AI agents. The</tspan>
+      <tspan x="20" dy="22">developer experience is unreal —</tspan>
+      <tspan x="20" dy="22">everything just works.</tspan>
+    </text>
+    <!-- Tags -->
+    <rect x="20" y="248" width="56" height="20" rx="5" ry="5" fill="#111" stroke="#2a2d30" stroke-width="0.5"/>
+    <text x="48" y="262" font-family="'Nunito', sans-serif" font-size="11" font-weight="400" fill="#666" text-anchor="middle">tweet</text>
+    <rect x="82" y="248" width="34" height="20" rx="5" ry="5" fill="#111" stroke="#2a2d30" stroke-width="0.5"/>
+    <text x="99" y="262" font-family="'Nunito', sans-serif" font-size="11" font-weight="400" fill="#666" text-anchor="middle">AI</text>
+    <rect x="122" y="248" width="64" height="20" rx="5" ry="5" fill="#111" stroke="#2a2d30" stroke-width="0.5"/>
+    <text x="154" y="262" font-family="'Nunito', sans-serif" font-size="11" font-weight="400" fill="#666" text-anchor="middle">devtools</text>
+  </g>
+
+  <!-- === TWEET CARD — front layer, overlapping the mymind card === -->
+  <g transform="translate(310, 300) rotate(-1, 240, 130)" filter="url(#shadow-mid)">
+    <rect width="480" height="260" rx="16" ry="16" fill="#16181C" stroke="#2F3336" stroke-width="1"/>
+
+    <!-- X logo top-right -->
+    <g transform="translate(430, 18) scale(0.03)">
+      <path fill="#555" d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"/>
+    </g>
+
+    <!-- Avatar -->
+    <circle cx="42" cy="42" r="20" fill="#2F3336" transform="translate(0,4)"/>
+    <text x="42" y="51" font-family="'Nunito', sans-serif" font-size="13" font-weight="600" fill="#555" text-anchor="middle">SC</text>
+
+    <!-- Name -->
+    <text x="74" y="34" font-family="'Nunito', sans-serif" font-size="16" font-weight="700" fill="#E7E9EA">Sarah Chen</text>
+    <text x="178" y="34" font-family="'Nunito', sans-serif" font-size="14" font-weight="400" fill="#555">@sarahchen · 2h</text>
+
+    <!-- Tweet body -->
+    <text font-family="'Nunito', sans-serif" font-size="16" font-weight="400" fill="#D0D0D4">
+      <tspan x="74" y="62">Just discovered the most incredible API</tspan>
+      <tspan x="74" dy="24">for building AI agents. The developer</tspan>
+      <tspan x="74" dy="24">experience is unreal — everything just</tspan>
+      <tspan x="74" dy="24">works. Thread below on how I set it up</tspan>
+      <tspan x="74" dy="24">in 30 minutes 🧵</tspan>
+    </text>
+
+    <!-- Actions -->
+    <!-- Reply -->
+    <g transform="translate(74, 206)">
+      <path d="M1.751 10c.004-.996.07-1.636.301-2.16a5 5 0 0 1 2.29-2.29c.657-.305 1.47-.38 3.16-.38h8.998c1.69 0 2.502.074 3.16.38a5 5 0 0 1 2.29 2.29c.305.657.38 1.47.38 3.16v2c0 1.69-.074 2.502-.38 3.16a5 5 0 0 1-2.29 2.29c-.657.305-1.47.38-3.16.38h-5.19l-4.74 3.293a.75.75 0 0 1-1.19-.607v-2.686h-.32c-1.69 0-2.502-.074-3.16-.38a5 5 0 0 1-2.29-2.29c-.305-.657-.38-1.47-.38-3.16v-2z" stroke="#555" stroke-width="1.2" fill="none" transform="scale(0.7)"/>
+    </g>
+    <text x="96" y="220" font-family="'Nunito', sans-serif" font-size="13" font-weight="400" fill="#555">24</text>
+
+    <!-- Retweet -->
+    <g transform="translate(148, 206)">
+      <path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2h4v2h-4c-2.21 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM19.5 20.12l-4.432-4.14 1.364-1.46L18.5 16.45V8c0-1.1-.896-2-2-2h-4V4h4c2.21 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14z" fill="#555" transform="scale(0.7)"/>
+    </g>
+    <text x="170" y="220" font-family="'Nunito', sans-serif" font-size="13" font-weight="400" fill="#555">89</text>
+
+    <!-- Heart -->
+    <g transform="translate(222, 206)">
+      <path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.807 1.1-.807-1.1C10.078 6.01 8.621 5.44 7.399 5.5c-1.174.06-2.377.68-3.17 2.14-.8 1.48-.678 3.58.585 5.96 1.2 2.26 3.274 4.57 6.186 6.9 2.912-2.33 4.986-4.64 6.186-6.9 1.263-2.38 1.385-4.48.585-5.96-.793-1.46-1.996-2.08-3.17-2.14z" stroke="#555" stroke-width="1.2" fill="none" transform="scale(0.7)"/>
+    </g>
+    <text x="244" y="220" font-family="'Nunito', sans-serif" font-size="13" font-weight="400" fill="#555">412</text>
+
+    <!-- Bookmark FILLED -->
+    <g transform="translate(310, 206)">
+      <path d="M4 4.5C4 3.12 5.119 2 6.5 2h11C18.881 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5z" fill="#1D9BF0" transform="scale(0.7)"/>
+    </g>
+  </g>
+
+  <!-- === NOTIFICATION — floating top-right, overlapping tweet card === -->
+  <g transform="translate(630, 280)" filter="url(#shadow-soft)">
+    <rect width="300" height="66" rx="4" ry="4" fill="#16181C" stroke="#2F3336" stroke-width="1"/>
+    <!-- Progress bar -->
+    <rect width="195" height="2" fill="#FF5924" rx="1"/>
+
+    <!-- X icon — 20px padding, 24x24 icon -->
+    <rect x="21" y="21" width="24" height="24" rx="6" ry="6" fill="#1A1A1A"/>
+    <g transform="translate(27, 24.5) scale(0.0234)">
+      <path fill="#FFFFFF" d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"/>
+    </g>
+
+    <text x="59" y="38" font-family="'Nunito', sans-serif" font-size="16" font-weight="400" fill="#E7E9EA">Saved to your mind</text>
+  </g>
+
+  <!-- === HEADLINE — top, clean === -->
+  <text x="640" y="140" font-family="'Nunito', sans-serif" font-size="52" font-weight="800" fill="#E7E9EA" text-anchor="middle" letter-spacing="-1.5">Bookmark on X. Find it in <tspan fill="#FF5924">mymind</tspan>.</text>
+  <text x="640" y="178" font-family="'Nunito', sans-serif" font-size="17" font-weight="400" fill="#555" text-anchor="middle">Zero clicks. Fully automatic.</text>
+</svg>

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Bookmarks to mymind for X",
+  "name": "X Bookmarks to mymind",
   "version": "1.0",
-  "description": "Automatically save your X/Twitter bookmarks to your mymind account. Not affiliated with mymind.",
+  "description": "Automatically save your X bookmarks to your mymind account. Not affiliated with mymind.",
   "permissions": [
     "webRequest",
     "cookies",
@@ -19,7 +19,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Bookmarks to mymind for X",
+    "default_title": "X Bookmarks to mymind",
     "default_icon": {
       "16": "icon16.png",
       "48": "icon48.png",

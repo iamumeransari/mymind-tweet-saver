@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="66" viewBox="0 0 300 66">
+  <defs>
+    <rect id="notif-bg" x="0.5" y="0.5" width="299" height="65" rx="4" ry="4"/>
+    <clipPath id="notif-clip"><use xlink:href="#notif-bg"/></clipPath>
+  </defs>
+
+  <!-- Notification background -->
+  <use xlink:href="#notif-bg" fill="#16181C" stroke="#2F3336" stroke-width="1"/>
+
+  <!-- Orange progress bar at top (at ~65% to show countdown) -->
+  <rect x="0" y="0" width="195" height="2" fill="#FF5924" clip-path="url(#notif-clip)"/>
+
+  <!-- X icon with dark bg — 20px padding from inner edge (border at 0.5), icon 24x24 -->
+  <rect x="21" y="21" width="24" height="24" rx="6" ry="6" fill="#1A1A1A"/>
+  <g transform="translate(27, 24.5) scale(0.0234)">
+    <path fill="#FFFFFF" fill-rule="nonzero" d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"/>
+  </g>
+
+  <!-- "Saved to your mind" — vertically centered: container center y=33, baseline offset for 16px ≈ +5 -->
+  <text x="59" y="38" font-family="Nunito, sans-serif" font-size="16" font-weight="400" fill="#E7E9EA">Saved to your mind</text>
+</svg>
