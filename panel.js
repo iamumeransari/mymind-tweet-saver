@@ -6,7 +6,7 @@
   if (!config) return;
   delete window.__mymindPanel;
 
-  const { connected, saveCount, fontUrl, logoUrl, autoDismiss } = config;
+  const { connected, saveCount, fontUrl, logoUrl } = config;
 
   const PANEL_CSS = `
     @font-face {
@@ -217,7 +217,7 @@
           </div>
         </div>
         <div class="footer">
-          <span class="counter"><span class="counter-num">${saveCount}</span> tweets saved</span>
+          <span class="counter"><span class="counter-num">${Number(saveCount) || 0}</span> tweets saved</span>
           <a class="open-link" href="https://access.mymind.com/" target="_blank">Open my mind \u2192</a>
         </div>
       </div>
@@ -248,9 +248,4 @@
 
   host.__close = closePanel;
   container.querySelector('.backdrop').addEventListener('click', closePanel);
-
-  // Auto-dismiss after 4s when triggered by a bookmark action
-  if (autoDismiss) {
-    setTimeout(closePanel, 4000);
-  }
 })();

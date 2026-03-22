@@ -155,20 +155,30 @@
 
   const iconSrc = (status === 'signin') ? logoUrl : xIconUrl;
 
-  let messageHtml = text;
-  if (status === 'signin' && redirect) {
-    messageHtml = `${text} <a href="${redirect}" target="_blank">Sign in \u2192</a>`;
-  }
-
   const notificationEl = document.createElement('mymind-notification');
-  notificationEl.innerHTML = `
-    <div class="mymind-notification-wrap">
-      <div class="mymind-notification-inner">
-        <img src="${iconSrc}">
-        <span>${messageHtml}</span>
-      </div>
-    </div>
-  `;
+  const wrap = document.createElement('div');
+  wrap.className = 'mymind-notification-wrap';
+  const inner = document.createElement('div');
+  inner.className = 'mymind-notification-inner';
+
+  const img = document.createElement('img');
+  img.src = iconSrc;
+  inner.appendChild(img);
+
+  const span = document.createElement('span');
+  span.textContent = text;
+  if (status === 'signin' && redirect) {
+    span.textContent = text + ' ';
+    const link = document.createElement('a');
+    link.href = redirect;
+    link.target = '_blank';
+    link.textContent = 'Sign in \u2192';
+    span.appendChild(link);
+  }
+  inner.appendChild(span);
+
+  wrap.appendChild(inner);
+  notificationEl.appendChild(wrap);
 
   if (status === 'success') notificationEl.classList.add('success');
   else if (status === 'error' || status === 'signin') notificationEl.classList.add('error');

@@ -1,7 +1,7 @@
 // --- Token Management ---
 
 async function getMymindTokens() {
-  const stored = await chrome.storage.local.get(['mymind_authenticity_token']);
+  const stored = await chrome.storage.session.get(['mymind_authenticity_token']);
   const authenticityToken = stored.mymind_authenticity_token;
 
   const [jwt, cid] = await Promise.all([
@@ -27,7 +27,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       (h) => h.name.toLowerCase() === 'x-authenticity-token'
     );
     if (header?.value) {
-      chrome.storage.local.set({ mymind_authenticity_token: header.value });
+      chrome.storage.session.set({ mymind_authenticity_token: header.value });
     }
   },
   { urls: ['*://access.mymind.com/*'] },
@@ -38,14 +38,22 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
 chrome.runtime.onInstalled.addListener(async (details) => {
   if (details.reason === 'install') {
-    // Open mymind sign-in page
     const tab = await chrome.tabs.create({ url: 'https://access.mymind.com/signin' });
 
-    // Wait for page to load, then show the sign-in panel
-    chrome.tabs.onUpdated.addListener(function listener(tabId, info) {
+    // Show sign-in panel once page loads; clean up listener if tab closes
+    const listener = (tabId, info) => {
       if (tabId === tab.id && info.status === 'complete') {
         chrome.tabs.onUpdated.removeListener(listener);
         showPanel(tab.id);
+      }
+    };
+    chrome.tabs.onUpdated.addListener(listener);
+
+    // Clean up if tab is closed before loading
+    chrome.tabs.onRemoved.addListener(function onRemoved(tabId) {
+      if (tabId === tab.id) {
+        chrome.tabs.onUpdated.removeListener(listener);
+        chrome.tabs.onRemoved.removeListener(onRemoved);
       }
     });
   }
@@ -53,7 +61,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 
 // --- Show status panel in page ---
 
-async function showPanel(tabId, { autoDismiss = false } = {}) {
+async function showPanel(tabId) {
   const tokens = await getMymindTokens();
   const { save_count = 0 } = await chrome.storage.local.get('save_count');
 
@@ -68,7 +76,6 @@ async function showPanel(tabId, { autoDismiss = false } = {}) {
       saveCount: save_count,
       fontUrl,
       logoUrl,
-      autoDismiss,
     }],
   });
 
@@ -108,7 +115,6 @@ async function saveToMymind(tabId, tweetUrl) {
   const tokens = await getMymindTokens();
 
   if (!tokens) {
-    console.error('[mymind] Missing tokens.');
     notifyTab(tabId, {
       status: 'signin',
       text: 'Connect mymind to sync tweets.',
@@ -122,22 +128,21 @@ async function saveToMymind(tabId, tweetUrl) {
       method: 'POST',
       headers: {
         'x-authenticity-token': tokens.authenticityToken,
-        'Cookie': `_cid=${tokens.cid}; _jwt=${tokens.jwt}`,
         'Content-Type': 'application/json',
         'accept': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify({ url: tweetUrl, type: 'WebPage' }),
     });
 
     if (response.ok) {
       const data = await response.json();
       const isExisting = response.status === 200;
-      console.log('[mymind] Saved:', tweetUrl, data);
 
-      // Increment save counter
+      // Increment save counter atomically
       if (!isExisting) {
         const { save_count = 0 } = await chrome.storage.local.get('save_count');
-        chrome.storage.local.set({ save_count: save_count + 1 });
+        await chrome.storage.local.set({ save_count: save_count + 1 });
       }
 
       notifyTab(tabId, {
@@ -153,12 +158,10 @@ async function saveToMymind(tabId, tweetUrl) {
       });
       return false;
     } else {
-      console.error('[mymind] Save failed:', response.status);
       notifyTab(tabId, { status: 'error', text: 'Something went wrong. Please try again.' });
       return false;
     }
   } catch (err) {
-    console.error('[mymind] Network error:', err);
     notifyTab(tabId, { status: 'error', text: 'Network error. Check your connection.' });
     return false;
   }
@@ -167,7 +170,6 @@ async function saveToMymind(tabId, tweetUrl) {
 // --- Resolve canonical tweet URL via content script ---
 
 async function resolveTweetUrl(tabId, tweetId) {
-  // Try up to 3 times with delays — the tweet may not be in the DOM yet
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const response = await chrome.tabs.sendMessage(tabId, {
@@ -181,7 +183,7 @@ async function resolveTweetUrl(tabId, tweetId) {
     if (attempt < 2) await new Promise((r) => setTimeout(r, 500));
   }
 
-  // Last resort: scrape the tab URL itself (works when viewing a single tweet)
+  // Fall back to tab URL when viewing a single tweet
   try {
     const tab = await chrome.tabs.get(tabId);
     const match = tab.url?.match(/x\.com\/([A-Za-z0-9_]+)\/status\/\d+/);
@@ -201,14 +203,27 @@ chrome.webRequest.onBeforeRequest.addListener(
     if (!raw?.[0]?.bytes) return;
 
     try {
-      const body = JSON.parse(new TextDecoder().decode(raw[0].bytes));
+      // Concatenate all raw chunks
+      const allBytes = new Uint8Array(
+        raw.reduce((acc, r) => acc + (r.bytes?.byteLength || 0), 0)
+      );
+      let offset = 0;
+      for (const r of raw) {
+        if (r.bytes) {
+          allBytes.set(new Uint8Array(r.bytes), offset);
+          offset += r.bytes.byteLength;
+        }
+      }
+
+      const body = JSON.parse(new TextDecoder().decode(allBytes));
       const tweetId = body?.variables?.tweet_id;
       if (!tweetId) return;
 
       const tabId = details.tabId;
-      console.log('[mymind] Bookmark detected, tweet ID:', tweetId);
 
-      resolveTweetUrl(tabId, tweetId).then((url) => saveToMymind(tabId, url));
+      resolveTweetUrl(tabId, tweetId)
+        .then((url) => saveToMymind(tabId, url))
+        .catch((err) => console.error('[mymind] Save pipeline error:', err));
     } catch (err) {
       console.error('[mymind] Failed to parse bookmark request:', err);
     }
@@ -216,5 +231,3 @@ chrome.webRequest.onBeforeRequest.addListener(
   { urls: ['*://x.com/i/api/graphql/*/CreateBookmark'] },
   ['requestBody']
 );
-
-console.log('[mymind] Tweet Saver extension loaded');

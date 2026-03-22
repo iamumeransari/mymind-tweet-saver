@@ -3,7 +3,6 @@
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'GET_TWEET_URL') {
     sendResponse({ url: resolveTweetUrl(msg.tweetId) });
-    return true;
   }
 });
 
