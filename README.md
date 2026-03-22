@@ -2,6 +2,9 @@
 
 Bookmark a tweet on X. Find it in mymind. Zero clicks. Fully automatic.
 
+<img width="1280" height="800" alt="KeyVisual" src="https://github.com/user-attachments/assets/da27e9f7-3606-414f-8211-8c8a81d4d5e5" />
+
+
 ## How it works
 
 1. Install the extension and sign in to your [mymind](https://mymind.com) account
