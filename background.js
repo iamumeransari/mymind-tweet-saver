@@ -31,7 +31,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     }
   },
   { urls: ['*://access.mymind.com/*'] },
-  ['requestHeaders', 'extraHeaders']
+  ['requestHeaders']
 );
 
 // --- First Install → Open sign-in page ---
@@ -83,10 +83,23 @@ chrome.action.onClicked.addListener(async (tab) => {
   showPanel(tab.id);
 });
 
-// --- Notify content script (in-page notification) ---
+// --- Notify via injected script (no content script dependency) ---
 
-function notifyTab(tabId, msg) {
-  chrome.tabs.sendMessage(tabId, { type: 'SHOW_NOTIFICATION', ...msg }).catch(() => {});
+async function notifyTab(tabId, msg) {
+  const fontUrl = chrome.runtime.getURL('nunito.woff2');
+  const logoUrl = chrome.runtime.getURL('logo.svg');
+  const xIconUrl = chrome.runtime.getURL('x-icon-bg.png');
+
+  await chrome.scripting.executeScript({
+    target: { tabId },
+    func: (config) => { window.__mymindNotify = config; },
+    args: [{ ...msg, fontUrl, logoUrl, xIconUrl }],
+  });
+
+  await chrome.scripting.executeScript({
+    target: { tabId },
+    files: ['notify.js'],
+  });
 }
 
 // --- Save to mymind ---
@@ -154,15 +167,27 @@ async function saveToMymind(tabId, tweetUrl) {
 // --- Resolve canonical tweet URL via content script ---
 
 async function resolveTweetUrl(tabId, tweetId) {
-  try {
-    const response = await chrome.tabs.sendMessage(tabId, {
-      type: 'GET_TWEET_URL',
-      tweetId,
-    });
-    if (response?.url) return response.url;
-  } catch {
-    // Content script not ready or tab closed
+  // Try up to 3 times with delays — the tweet may not be in the DOM yet
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const response = await chrome.tabs.sendMessage(tabId, {
+        type: 'GET_TWEET_URL',
+        tweetId,
+      });
+      if (response?.url) return response.url;
+    } catch (e) {
+      // Content script not ready or tab closed
+    }
+    if (attempt < 2) await new Promise((r) => setTimeout(r, 500));
   }
+
+  // Last resort: scrape the tab URL itself (works when viewing a single tweet)
+  try {
+    const tab = await chrome.tabs.get(tabId);
+    const match = tab.url?.match(/x\.com\/([A-Za-z0-9_]+)\/status\/\d+/);
+    if (match && match[1] !== 'i') return tab.url.split('?')[0];
+  } catch (e) {}
+
   return `https://x.com/i/web/status/${tweetId}`;
 }
 
