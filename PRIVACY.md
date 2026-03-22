@@ -2,47 +2,53 @@
 
 **Last updated:** March 22, 2026
 
+This is a community-built extension and is not officially affiliated with or endorsed by mymind or X/Twitter.
+
 ## What this extension does
 
-Bookmarks to mymind for X automatically saves your X/Twitter bookmarks to your mymind account. When you bookmark a tweet on X, the extension detects the action and sends the tweet URL to mymind's servers so it appears in your mymind library.
+Bookmarks to mymind for X lets you automatically save tweets to your mymind account when you bookmark them on X. The extension detects your bookmark action and sends the tweet URL to your mymind account.
 
 ## Data we access
 
-### Authentication tokens
-The extension reads your mymind session cookies (`_jwt`, `_cid`) and authenticity token to authenticate API requests to mymind on your behalf. The authenticity token is stored in your browser's local storage and persists until the extension is uninstalled. Cookies are read directly from the browser's cookie jar. These credentials are never transmitted to any server other than `access.mymind.com`.
+### Your mymind session
+To save tweets on your behalf, the extension uses your existing mymind login session. It reads your mymind authentication credentials from the browser's cookie jar and local storage. These credentials are only used to communicate with `access.mymind.com` and are never sent anywhere else.
 
-### Bookmark actions
-The extension monitors bookmark requests on `x.com` to detect when you bookmark a tweet. It reads the tweet ID from the bookmark request body solely to identify which tweet to save. No other browsing activity is monitored or recorded.
+### Bookmark actions on X
+The extension detects when you bookmark a tweet on X. It reads only the tweet ID from the bookmark action to identify which tweet to save. No other activity on X or any other website is monitored.
 
 ### Tweet URLs
-When you bookmark a tweet, the extension resolves the canonical tweet URL (including the author's username) from the page DOM. This URL is sent to `access.mymind.com` to save the tweet to your mymind account.
+When you bookmark a tweet, the extension determines the full tweet URL (including the author's username) so mymind can display a rich preview. This URL is sent to `access.mymind.com`.
 
 ### Save counter
-The extension stores a local count of how many tweets you've saved. This number never leaves your browser.
+A local count of how many tweets you've saved is stored in your browser. This number never leaves your device.
 
 ## Data we do NOT collect
 
-- We do not collect, store, or transmit any personal information
-- We do not track your browsing history or activity outside of the bookmark action on X
-- We do not read tweet content, your timeline, DMs, or any other X data
-- We do not use analytics, telemetry, or third-party tracking
-- We do not sell, share, or transfer any data to third parties
-- We do not store any data on external servers — all communication is directly between your browser and `access.mymind.com`
+- No personal information is collected, stored, or transmitted
+- No browsing history or activity outside of the bookmark action on X
+- No tweet content, timelines, DMs, or other X data
+- No analytics, telemetry, or third-party tracking
+- No data is sold, shared, or transferred to third parties
+- No data is stored on external servers — all communication is directly between your browser and `access.mymind.com`
 
 ## Permissions explained
 
-- **`cookies`** — Read mymind session cookies to authenticate API requests
-- **`webRequest`** — Detect when you bookmark a tweet on X (read-only, no request modification)
-- **`storage`** — Store the save counter locally in your browser
-- **`activeTab`** — Allows the extension to inject UI into the current tab when you click the extension icon
-- **`scripting`** — Inject notification and panel UI into the page to confirm saves and show connection status
-- **Host permissions on `x.com` / `twitter.com`** — Required to detect bookmark actions and resolve tweet URLs
-- **Host permissions on `access.mymind.com`** — Required to authenticate and save tweets to your mymind account
+- **`cookies`** — Read your mymind login session to authenticate saves
+- **`webRequest`** — Detect when you bookmark a tweet on X (read-only, no requests are modified or blocked)
+- **`storage`** — Store the save counter and authentication token locally in your browser
+- **`activeTab`** — Show the extension's status panel on the current page when you click the extension icon
+- **`scripting`** — Display save confirmations and the status panel on the page
+- **Host permissions on `x.com` / `twitter.com`** — Detect bookmark actions and resolve tweet URLs
+- **Host permissions on `access.mymind.com`** — Authenticate and save tweets to your mymind account
 
 ## Data retention
 
-The authenticity token and save counter persist in local storage until the extension is uninstalled. Session cookies are managed by the browser and follow their own expiry. No data is retained on any external server by this extension.
+Authentication credentials and the save counter are stored locally in your browser and persist until the extension is uninstalled. No data is retained on any external server by this extension.
+
+## Open source
+
+This extension is open source. You can review the full source code at [github.com/iamumeransari/mymind-tweet-saver](https://github.com/iamumeransari/mymind-tweet-saver).
 
 ## Contact
 
-For questions about this privacy policy, open an issue at [github.com/iamumeransari/mymind-tweet-saver](https://github.com/iamumeransari/mymind-tweet-saver).
+For questions about this privacy policy, open an issue on the [GitHub repository](https://github.com/iamumeransari/mymind-tweet-saver/issues).

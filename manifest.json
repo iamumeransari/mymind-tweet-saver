@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Bookmarks to mymind for X",
   "version": "1.0",
-  "description": "Automatically save your X/Twitter bookmarks to mymind",
+  "description": "Automatically save your X/Twitter bookmarks to your mymind account. Not affiliated with mymind.",
   "permissions": [
     "webRequest",
     "cookies",
