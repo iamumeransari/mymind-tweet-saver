@@ -1,7 +1,7 @@
 // --- Token Management ---
 
 async function getMymindTokens() {
-  const stored = await chrome.storage.session.get(['mymind_authenticity_token']);
+  const stored = await chrome.storage.local.get(['mymind_authenticity_token']);
   const authenticityToken = stored.mymind_authenticity_token;
 
   const [jwt, cid] = await Promise.all([
@@ -27,7 +27,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       (h) => h.name.toLowerCase() === 'x-authenticity-token'
     );
     if (header?.value) {
-      chrome.storage.session.set({ mymind_authenticity_token: header.value });
+      chrome.storage.local.set({ mymind_authenticity_token: header.value });
     }
   },
   { urls: ['*://access.mymind.com/*'] },
