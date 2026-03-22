@@ -103,7 +103,7 @@ const NOTIFICATION_CSS = `
   }
 
   mymind-notification.error .mymind-notification-inner {
-    border: 2px solid #F94F4F;
+    border: 1.5px solid #FF5924;
   }
 
   .mymind-notification-wrap {
@@ -213,7 +213,7 @@ function showNotification({ status, text, redirect }) {
   // Build message HTML
   let messageHtml = text;
   if (status === 'signin' && redirect) {
-    messageHtml = `${text}<br><a href="${redirect}" target="_blank">Sign in \u2192</a>`;
+    messageHtml = `${text} <a href="${redirect}" target="_blank">Sign in \u2192</a>`;
   }
 
   const notificationEl = document.createElement('mymind-notification');

@@ -31,44 +31,56 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     }
   },
   { urls: ['*://access.mymind.com/*'] },
-  ['requestHeaders']
+  ['requestHeaders', 'extraHeaders']
 );
 
 // --- First Install → Open sign-in page ---
 
-chrome.runtime.onInstalled.addListener((details) => {
+chrome.runtime.onInstalled.addListener(async (details) => {
   if (details.reason === 'install') {
-    chrome.tabs.create({ url: 'https://access.mymind.com/signin' });
+    // Open mymind sign-in page
+    const tab = await chrome.tabs.create({ url: 'https://access.mymind.com/signin' });
+
+    // Wait for page to load, then show the sign-in panel
+    chrome.tabs.onUpdated.addListener(function listener(tabId, info) {
+      if (tabId === tab.id && info.status === 'complete') {
+        chrome.tabs.onUpdated.removeListener(listener);
+        showPanel(tab.id);
+      }
+    });
   }
 });
 
-// --- Extension Icon Click → Show status panel in page ---
+// --- Show status panel in page ---
 
-chrome.action.onClicked.addListener(async (tab) => {
-  if (!tab?.id) return;
-
+async function showPanel(tabId, { autoDismiss = false } = {}) {
   const tokens = await getMymindTokens();
   const { save_count = 0 } = await chrome.storage.local.get('save_count');
 
-  // Set config, then inject panel.js which reads it
   const fontUrl = chrome.runtime.getURL('nunito.woff2');
   const logoUrl = chrome.runtime.getURL('logo.svg');
 
   await chrome.scripting.executeScript({
-    target: { tabId: tab.id },
+    target: { tabId },
     func: (config) => { window.__mymindPanel = config; },
     args: [{
       connected: !!tokens,
       saveCount: save_count,
       fontUrl,
       logoUrl,
+      autoDismiss,
     }],
   });
 
   await chrome.scripting.executeScript({
-    target: { tabId: tab.id },
+    target: { tabId },
     files: ['panel.js'],
   });
+}
+
+chrome.action.onClicked.addListener(async (tab) => {
+  if (!tab?.id) return;
+  showPanel(tab.id);
 });
 
 // --- Notify content script (in-page notification) ---
@@ -86,7 +98,7 @@ async function saveToMymind(tabId, tweetUrl) {
     console.error('[mymind] Missing tokens.');
     notifyTab(tabId, {
       status: 'signin',
-      text: 'Please sign in to your mind.',
+      text: 'Connect mymind to sync tweets.',
       redirect: 'https://access.mymind.com/signin',
     });
     return false;
@@ -123,7 +135,7 @@ async function saveToMymind(tabId, tweetUrl) {
     } else if (response.status === 401) {
       notifyTab(tabId, {
         status: 'signin',
-        text: 'Your session expired. Please sign in.',
+        text: 'You\'ve been signed out of mymind.',
         redirect: 'https://access.mymind.com/signin',
       });
       return false;

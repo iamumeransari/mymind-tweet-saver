@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "mymind Tweet Saver",
+  "name": "Bookmarks to mymind for X",
   "version": "1.0",
-  "description": "Automatically saves tweets to mymind when you bookmark them on X/Twitter",
+  "description": "Automatically save your X/Twitter bookmarks to mymind",
   "permissions": [
     "webRequest",
     "cookies",
@@ -19,7 +19,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "mymind Tweet Saver",
+    "default_title": "Bookmarks to mymind for X",
     "default_icon": {
       "16": "icon16.png",
       "48": "icon48.png",
@@ -35,7 +35,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["nunito.woff2", "logo.svg", "x-icon.svg", "x-icon-bg.png"],
+      "resources": ["nunito.woff2", "logo.svg", "x-icon.svg"],
       "matches": ["<all_urls>"]
     }
   ],

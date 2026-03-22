@@ -6,7 +6,7 @@
   if (!config) return;
   delete window.__mymindPanel;
 
-  const { connected, saveCount, fontUrl, logoUrl } = config;
+  const { connected, saveCount, fontUrl, logoUrl, autoDismiss } = config;
 
   const PANEL_CSS = `
     @font-face {
@@ -248,4 +248,9 @@
 
   host.__close = closePanel;
   container.querySelector('.backdrop').addEventListener('click', closePanel);
+
+  // Auto-dismiss after 4s when triggered by a bookmark action
+  if (autoDismiss) {
+    setTimeout(closePanel, 4000);
+  }
 })();
