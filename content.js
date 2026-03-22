@@ -43,7 +43,7 @@ function resolveTweetUrl(tweetId) {
 const ASSETS = {
   font: chrome.runtime.getURL('nunito.woff2'),
   logo: chrome.runtime.getURL('logo.svg'),
-  xIcon: chrome.runtime.getURL('x-icon.svg'),
+  xIcon: chrome.runtime.getURL('x-icon-bg.png'),
 };
 
 // Lifted directly from the original mymind extension's notification.css
@@ -66,7 +66,7 @@ const NOTIFICATION_CSS = `
     top: 30px;
     box-shadow: 11px 11px 22px rgba(0, 0, 0, 0.5);
     border-radius: var(--border-radius);
-    width: 350px;
+    width: 300px;
     box-sizing: border-box;
     user-select: none;
     line-height: 1.1;
@@ -121,7 +121,6 @@ const NOTIFICATION_CSS = `
     color: #E7E9EA;
     position: relative;
     z-index: 3;
-    min-height: 90px;
     padding: 20px;
     box-sizing: border-box;
     border: 1px solid #2F3336;
@@ -131,13 +130,17 @@ const NOTIFICATION_CSS = `
 
   .mymind-notification-inner img {
     width: 24px;
-    margin: 0 20px;
+    height: 24px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    margin-right: 14px;
+    flex-shrink: 0;
   }
 
   .mymind-notification-inner span {
     color: inherit;
     font-weight: normal;
-    font: 20px/22px 'Nunito';
+    font: 16px/20px 'Nunito';
     letter-spacing: 0;
   }
 

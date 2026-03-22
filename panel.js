@@ -121,37 +121,37 @@
     .open-link:hover { opacity: 0.8; }
 
     .signin {
-      padding: 36px 28px 28px;
+      padding: 24px 20px 22px;
       text-align: center;
     }
 
     .signin img {
-      width: 29px;
-      height: 38px;
-      margin-bottom: 18px;
+      width: 24px;
+      height: auto;
+      margin-bottom: 14px;
     }
 
     .signin h1 {
       font: 18px/22px 'Nunito', sans-serif;
       font-weight: normal;
       color: #E7E9EA;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .signin p {
-      font: 14px/19px 'Nunito', sans-serif;
+      font: 13px/18px 'Nunito', sans-serif;
       color: #71767B;
-      margin-bottom: 22px;
+      margin-bottom: 16px;
     }
 
     .signin-btn {
       display: inline-block;
       background: #FF5924;
       color: #fff;
-      font: 14px/1 'Nunito', sans-serif;
+      font: 13px/1 'Nunito', sans-serif;
       border: none;
       border-radius: 50px;
-      padding: 11px 28px;
+      padding: 10px 24px;
       cursor: pointer;
       text-decoration: none;
       transition: opacity 0.2s ease;

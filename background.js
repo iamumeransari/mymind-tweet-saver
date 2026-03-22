@@ -129,7 +129,7 @@ async function saveToMymind(tabId, tweetUrl) {
 
       notifyTab(tabId, {
         status: 'success',
-        text: isExisting ? 'Already in your mind' : 'Saved to your mind',
+        text: isExisting ? 'Already in mymind' : 'Saved to mymind',
       });
       return true;
     } else if (response.status === 401) {

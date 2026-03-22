@@ -35,7 +35,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["nunito.woff2", "logo.svg", "x-icon.svg"],
+      "resources": ["nunito.woff2", "logo.svg", "x-icon.svg", "x-icon-bg.png"],
       "matches": ["<all_urls>"]
     }
   ],
