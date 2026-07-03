@@ -15,7 +15,7 @@ A small notification confirms each save.
 
 ## Install
 
-Available on the [Chrome Web Store](https://chromewebstore.google.com) (60+ Active Users).
+Available on the [Chrome Web Store](chromewebstore.google.com/detail/x-bookmarks-to-mymind/kcapednploiocmiibkhilidejpogomei) (60+ Active Users).
 
 Or load it manually:
 
